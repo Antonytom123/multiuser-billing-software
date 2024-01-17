@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MultiUser Billing Software In India</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/logo/logo3.png' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendor/owl-carousel/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/owl-carousel/css/owl.theme.default.min.css' %}">
+    <link href="{% static 'assets/vendor/jqvmap/css/jqvmap.min.css ' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css ' %}" rel="stylesheet">
+    
+
+
+</head>
+<style>
+    .search_bar {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    #searchInput {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        width: 200px;
+    }
+
+    .search-button {
+        background-color: #3498db; 
+        color: white; 
+        border: none; 
+        padding: 10px 20px;
+        font-size: 16px; 
+        cursor: pointer; 
+        border-radius: 5px; 
+        transition: background-color 0.3s ease; 
+    }
+
+    .search-button:hover {
+        background-color: #2980b9;
+    }
+</style>
+
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper" >
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header ">
+            <a href="" class="brand-logo">
+                <img class="logo-abbr" src="{% static 'img/logo/logo3.png' %}" alt="">
+                <img class="logo-compact" src="{% static 'img/logo/logo3.png' %}" alt="">
+                <img class="brand-title" src="{% static 'img/logo/multiuserimg3.png' %}" alt="">
+
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="search_bar dropdown">
+                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
+                                    <i class="mdi mdi-magnify"></i>
+                                </span>
+                                <div class="dropdown-menu p-0 m-0">
+                                <div class="header-left">
+                                    <div class="search_bar">
+                                        <input id="searchInput" class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                        <button class="search-button" onclick="searchModule()">Search</button>
+                                    </div>
+                                    
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <ul class="navbar-nav header-right">
+        
+                            <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                <div class="col-lg-4">
+                            {% if staff.position == 'company' %}
+                        
+                            {% if staff.company.profile_pic %}
+                            <img width="35" height="35" class="rounded-circle" src="{{ staff.company.profile_pic.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'img/default.png' %}" alt="" width="35" height="35"
+                            class="rounded-circle">
+                            {% endif %}
+                        {% else %}  
+                            {% if staff.img %}
+                            <img width="35" height="35" class="rounded-circle" src="{{ staff.img.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'img/default.png' %}" alt="" width="35" height="35"
+                            class="rounded-circle">
+                            {% endif %}
+                        {% endif %}  
+                                </div>
+                                <div>
+
+                        <h5 class="h5" style="font-family: 'Times New Roman', Times, serif;padding-left: 5px;">
+                            <b>
+                              {% if staff.position == 'company' %}
+        
+                                {{staff.company.company_name}}
+        
+                              {% else %}
+        
+                                {{staff.first_name}}{{staff.last_name}}
+        
+                              {% endif %} 
+                            </b></h5>
+                        </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    {% if staff.position == 'company' %}
+                                    <a href="{% url 'profile' %}" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Profile </span>
+                                    </a>
+                                    {% else %} 
+                                     
+                                    <a href="{% url 'staffprofile' %}" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Profile </span>
+                                    </a>
+                                    {% endif %}  
+                                    
+                                    <a href="{% url 'logout' %}" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Logout </span>
+                                    </a>
+                                    
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav ">
+            <div class="quixnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li>
+                        {% if staff.position == 'company' %}
+                        <a href="{% url 'homepage' %}" aria-expanded="false"><i class="icon icon-world-2"></i><span
+                        class="nav-text">Dashboard</span></a></li>
+                        {% else %}
+                        <a href="{% url 'staffhome' %}" aria-expanded="false"><i class="icon icon-world-2"></i><span
+                            class="nav-text">Dashboard</span></a>
+                            {% endif %}
+                        </li>
+
+                    <li><a href="/" aria-expanded="false"><i class="icon icon-single-04"></i><span
+                            class="nav-text">Parties</span></a></li>
+                            
+                            <div class="position-relative nav-text">
+                               
+                                    <div class="position-absolute end-0 bottom-0" style="z-index: 1; margin-top: 8px; margin-right: 0.9rem; margin-left: 14vw;">
+                                        <a style="color: black; margin-top: -2px; width: 20px;" href="{% url 'add_item' %}">
+                                            <span>
+                                                <i class="fa fa-plus fa-stack-.5x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+
+                            </div>
+                            
+                              <li class="sidebar-item">
+                                <a class="sidebar-link mt-2" href="{% url 'view_item'  %}" aria-expanded="false">
+                                  <span>
+                                    <b style="margin-left: 10px;"><i class="fa fa-th"></i></b>
+                                  </span>
+                                  <span class="hide-menu nav-text"><b>Items</b></span>
+                                </a>
+                              </li>
+
+                              
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-app-store"></i><span class="nav-text">Sales</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="./app-profile.html">Invoice</a></li>
+                            <li><a href="./app-calender.html">Credit Note</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                        class="icon icon-app-store"></i><span class="nav-text">Purchase</span></a>
+                <ul aria-expanded="false">
+                    <li><a href="./app-profile.html">Invoice</a></li>
+                    <li><a href="./app-calender.html">Credit Note</a></li>
+                </ul>
+            </li>
+
+                    <li><a href="widget-basic.html" aria-expanded="false"><i class="icon icon-globe-2"></i><span
+                        class="nav-text">Stock Report</span></a></li>
+                    
+                </ul>
+            </div>
+
+
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+        {% block content %}{% endblock content %}
+    
+    </div>
+
+<script>
+    function searchModule() {
+        var searchInput = document.getElementById('searchInput').value.toLowerCase();
+        
+        var modules = {
+            'dashboard': '{% url "homepage" %}',
+            'parties': '',
+            'items': '{% url "add_item" %}',
+            'sales': '',
+            'purchase': '',
+            'stock-report': '',
+        };
+
+        if (modules.hasOwnProperty(searchInput)) {
+            window.location.href = modules[searchInput];
+        } else {
+            alert('Module not found');
+        }
+    }
+</script>
+
+   
+ <!-- Required vendors -->
+ <script src="{% static 'assets/vendor/global/global.min.js' %}"></script>
+ <script src="{% static 'assets/js/quixnav-init.js' %}"></script>
+ <script src="{% static 'assets/js/custom.min.js' %}"></script>
+
+
+ <!-- Vectormap -->
+ <script src="{% static 'assets/vendor/raphael/raphael.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/morris/morris.min.js' %}"></script>
+
+
+ <script src="{% static 'assets/vendor/circle-progress/circle-progress.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/chart.js/Chart.bundle.min.js' %}"></script>
+
+ <script src="{% static 'assets/vendor/gaugeJS/dist/gauge.min.js' %}"></script>
+
+ <!--  flot-chart js -->
+ <script src="{% static 'assets/vendor/flot/jquery.flot.js' %}"></script>
+ <script src="{% static 'assets/vendor/flot/jquery.flot.resize.js' %}"></script>
+
+ <!-- Owl Carousel -->
+ <script src="{% static 'assets/vendor/owl-carousel/js/owl.carousel.min.js' %}"></script>
+
+ <!-- Counter Up -->
+ <script src="{% static 'assets/vendor/jqvmap/js/jquery.vmap.min.js' %}"></script>
+ <script src="{% static 'assets/vendor/jqvmap/js/jquery.vmap.usa.js' %}"></script>
+ <script src="{% static 'assets/vendor/jquery.counterup/jquery.counterup.min.js' %}"></script>
+
+
+ <script src="{% static 'assets/js/dashboard/dashboard-1.js' %}"></script>
+ <script src="{% static 'assets/js/sidebarmenu.js' %}"></script>
+
+
+
+</body>
+
+</html>
